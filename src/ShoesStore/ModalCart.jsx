@@ -1,6 +1,14 @@
 import React, { Component } from "react";
 
 export default class ModalCart extends Component {
+  totalCart = () => {
+    let { productCart } = this.props;
+    let total = 0;
+    for (let itemCart of productCart) {
+      total += itemCart.quantityCart * itemCart.price;
+    }
+    return total;
+  };
   render() {
     let { productCart, deleteToCart, changeQuantity } = this.props;
     return (
@@ -33,7 +41,7 @@ export default class ModalCart extends Component {
                   />
                 </div>
                 <div className="modal-body text-center">
-                  <table className="table ">
+                  <table className="table">
                     <thead>
                       <tr>
                         <th>Mã SP</th>
@@ -51,7 +59,7 @@ export default class ModalCart extends Component {
                       {productCart.map((prod, index) => {
                         return (
                           <tr key={index} className="align-middle">
-                            <td>{prod.id}</td>
+                            <td className="fs-5">{prod.id}</td>
                             <td className="fs-5 text-success">{prod.name}</td>
                             <td>
                               <img
@@ -101,6 +109,14 @@ export default class ModalCart extends Component {
                         );
                       })}
                     </tbody>
+                    <tfoot>
+                      <h5 className="mt-2">
+                        Total:{" "}
+                        <span className="text-danger">
+                          {this.totalCart()} $
+                        </span>
+                      </h5>
+                    </tfoot>
                   </table>
                 </div>
                 <div className="modal-footer">
