@@ -48,7 +48,7 @@ export default class ShoesStore extends Component {
   deleteToCart = (id) => {
     console.log(id);
     let index = this.state.productCart.findIndex((item) => item.id === id);
-    if (index != -1) {
+    if (index !== -1) {
       this.state.productCart.splice(index, 1);
     }
     this.setState({
